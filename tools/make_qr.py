@@ -1,13 +1,19 @@
-"""Branded QR cards for the Insight call back page.
+"""Builds every QR code the team needs, for one address.
 Run from the repo root:  python3 tools/make_qr.py https://your-address
-Needs: pip install -r tools/requirements.txt, and Google Chrome (set CHROME if it is not in the Mac default spot).  ->  public/qr/insight-qr-phone.png, insight-qr-ipad.png, insight-qr.svg
+Needs: pip install -r tools/requirements.txt, and Google Chrome (set CHROME if it is not in the Mac default spot).
+
+Writes public/qr/:
+  screens/  full screen cards to show on a device (iPhone, Android, iPad, iPad Pro, older phone)
+  plain/    the QR on its own: SVG with and without the logo, PNG at 512, 1024 and 2048 px
+  print/    A4 and A5 PDFs
+  insight-qr-all.zip  everything above in one download
 """
-import base64, os, pathlib, subprocess, sys, segno
+import base64, os, pathlib, shutil, subprocess, sys, zipfile, segno
 
 URL = sys.argv[1] if len(sys.argv) > 1 else "https://insight-quote-production.up.railway.app"  # our preview
 CHROME = os.environ.get("CHROME", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 HERE = pathlib.Path(__file__).resolve().parent.parent  # repo root
-OUT = HERE / "public" / "qr"; OUT.mkdir(parents=True, exist_ok=True)
+OUT = HERE / "public" / "qr"
 GREEN, DEEP = "#00774e", "#0b4d35"
 
 def qr_svg(logo=True):
@@ -37,7 +43,8 @@ def card(w, h, qr_px):
     return f"""<!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-*{{margin:0;box-sizing:border-box}}
+@page{{size:{w}px {h}px;margin:0}}
+*{{margin:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 html,body{{width:{w}px;height:{h}px}}
 body{{font-family:Manrope,sans-serif;background:{GREEN};color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:{80*s}px {64*s}px {72*s}px;
 background-image:radial-gradient(120% 70% at 50% 0%,rgba(255,255,255,.10),rgba(255,255,255,0) 60%)}}
@@ -49,6 +56,7 @@ h1{{font-size:{76*s}px;line-height:1.05;font-weight:800;letter-spacing:-.015em;t
 .cue{{display:flex;align-items:center;gap:{16*s}px;font-size:{34*s}px;font-weight:700;white-space:nowrap}}
 .cue svg{{width:{44*s}px;height:{44*s}px}}
 .foot{{font-size:{28*s}px;font-weight:600;opacity:.85;white-space:nowrap}}
+@media print{{.qr{{box-shadow:none}}}}  /* shadows print as a dark box in PDFs */
 </style></head><body>
 <img class="logo" src="data:image/png;base64,{logo}">
 <div class="mid">
@@ -59,14 +67,37 @@ h1{{font-size:{76*s}px;line-height:1.05;font-weight:800;letter-spacing:-.015em;t
 <div class="foot">insightpestsolutions.au</div>
 </body></html>"""
 
-def render(name, w, h, qr_px):
-    html = OUT / f".{name}.html"; html.write_text(card(w, h, qr_px))
-    subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=1",
-                    f"--window-size={w},{h}", "--virtual-time-budget=4000", f"--screenshot={OUT / name}.png", html.as_uri()],
-                   check=True, capture_output=True)
-    html.unlink()
+def plain(size):
+    pad = round(size * 4 / 49)  # 4 module quiet zone around a 41 module code
+    return f"""<!doctype html><style>*{{margin:0}}html,body{{width:{size}px;height:{size}px;background:#fff}}
+body{{padding:{pad}px;box-sizing:border-box}}svg{{display:block;width:100%;height:100%}}</style>{qr_svg()}"""
 
-(OUT / "insight-qr.svg").write_text(qr_svg())
-render("insight-qr-phone", 1080, 1440, 600)   # phone: shows at a comfortable size, not edge to edge
-render("insight-qr-ipad", 1536, 2048, 900)    # iPad portrait: big enough to scan from a step back
-print("done", *sorted(p.name for p in OUT.iterdir()))
+def chrome(html, out, w, h, pdf=False):
+    tmp = OUT / ".render.html"; tmp.write_text(html)
+    mode = [f"--print-to-pdf={out}", "--no-pdf-header-footer"] if pdf else [f"--screenshot={out}"]
+    subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=1",
+                    f"--window-size={w},{h}", "--virtual-time-budget=4000", *mode, tmp.as_uri()], check=True, capture_output=True)
+    tmp.unlink()
+
+# Device screens, portrait, at each device's native pixel size. QR is about 55% of the width.
+SCREENS = {
+    "insight-qr-iphone.png":  (1179, 2556),  # iPhone 14 Pro to 16 and most modern iPhones
+    "insight-qr-android.png": (1080, 2400),  # most Android phones
+    "insight-qr-phone-short.png": (1080, 1440),  # older or smaller phones, and phones in a case window
+    "insight-qr-ipad.png":     (1640, 2360),  # iPad and iPad Air 10.9 to 11 inch
+    "insight-qr-ipad-pro.png": (2048, 2732),  # iPad Pro 12.9 to 13 inch
+}
+PRINT = {"insight-qr-a4.pdf": (794, 1123), "insight-qr-a5.pdf": (559, 794)}  # A4 and A5 at 96 px per inch
+PLAIN = (512, 1024, 2048)
+
+if OUT.exists(): shutil.rmtree(OUT)
+for d in ("screens", "plain", "print"): (OUT / d).mkdir(parents=True)
+(OUT / "plain" / "insight-qr.svg").write_text(qr_svg())
+(OUT / "plain" / "insight-qr-no-logo.svg").write_text(qr_svg(logo=False))
+for size in PLAIN: chrome(plain(size), OUT / "plain" / f"insight-qr-{size}.png", size, size)
+for name, (w, h) in SCREENS.items(): chrome(card(w, h, round(w * .555)), OUT / "screens" / name, w, h)
+for name, (w, h) in PRINT.items(): chrome(card(w, h, round(w * .555)), OUT / "print" / name, w, h, pdf=True)
+files = sorted(p for p in OUT.rglob("*") if p.is_file())
+with zipfile.ZipFile(OUT / "insight-qr-all.zip", "w", zipfile.ZIP_DEFLATED) as z:
+    for f in files: z.write(f, f.relative_to(OUT))
+print("QR for", URL); print(*(str(f.relative_to(OUT)) for f in files + [OUT / "insight-qr-all.zip"]), sep="\n")

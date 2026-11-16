@@ -13,6 +13,25 @@ At the door, a customer who only wants a call back scans a QR code shown in the 
 
 The Railway links are a **preview** so you can see it working. Insight hosts the real one on its own system using the steps below.
 
+## QR code downloads
+
+Every file opens the preview form. Rebuild them for your own address before going live (see [Rebuild the QR codes](#rebuild-the-qr-codes)). Every image was decoded by a QR reader to check it opens the right page.
+
+| For | Size | Download |
+|---|---|---|
+| **Everything in one zip** | All 12 files below | [insight-qr-all.zip](https://github.com/Brodie-Eaze/insight-lead-capture-qr-code/raw/main/public/qr/insight-qr-all.zip) |
+| iPhone | 1179 x 2556 full screen card | [insight-qr-iphone.png](https://github.com/Brodie-Eaze/insight-lead-capture-qr-code/raw/main/public/qr/screens/insight-qr-iphone.png) |
+| Android phone | 1080 x 2400 full screen card | [insight-qr-android.png](https://github.com/Brodie-Eaze/insight-lead-capture-qr-code/raw/main/public/qr/screens/insight-qr-android.png) |
+| Older or smaller phone | 1080 x 1440 card | [insight-qr-phone-short.png](https://github.com/Brodie-Eaze/insight-lead-capture-qr-code/raw/main/public/qr/screens/insight-qr-phone-short.png) |
+| iPad and iPad Air | 1640 x 2360 full screen card | [insight-qr-ipad.png](https://github.com/Brodie-Eaze/insight-lead-capture-qr-code/raw/main/public/qr/screens/insight-qr-ipad.png) |
+| iPad Pro | 2048 x 2732 full screen card | [insight-qr-ipad-pro.png](https://github.com/Brodie-Eaze/insight-lead-capture-qr-code/raw/main/public/qr/screens/insight-qr-ipad-pro.png) |
+| QR for the app | SVG with logo, sharp at any size | [insight-qr.svg](https://github.com/Brodie-Eaze/insight-lead-capture-qr-code/raw/main/public/qr/plain/insight-qr.svg) |
+| QR without logo | SVG | [insight-qr-no-logo.svg](https://github.com/Brodie-Eaze/insight-lead-capture-qr-code/raw/main/public/qr/plain/insight-qr-no-logo.svg) |
+| QR as PNG | 512, 1024 and 2048 px | [512](https://github.com/Brodie-Eaze/insight-lead-capture-qr-code/raw/main/public/qr/plain/insight-qr-512.png) · [1024](https://github.com/Brodie-Eaze/insight-lead-capture-qr-code/raw/main/public/qr/plain/insight-qr-1024.png) · [2048](https://github.com/Brodie-Eaze/insight-lead-capture-qr-code/raw/main/public/qr/plain/insight-qr-2048.png) |
+| Print | A4 poster and A5 flyer PDFs | [A4](https://github.com/Brodie-Eaze/insight-lead-capture-qr-code/raw/main/public/qr/print/insight-qr-a4.pdf) · [A5](https://github.com/Brodie-Eaze/insight-lead-capture-qr-code/raw/main/public/qr/print/insight-qr-a5.pdf) |
+
+<img src="public/qr/screens/insight-qr-iphone.png" width="180" alt="The iPhone QR card"> <img src="public/qr/screens/insight-qr-ipad.png" width="260" alt="The iPad QR card">
+
 ## Screenshots
 
 All screenshots are taken on a phone sized screen with made up details.
@@ -61,7 +80,11 @@ Rep's app shows QR  →  customer scans  →  form (/)  →  POST /api/lead
 │   ├── leads.css           Styles for the password protected leads list
 │   ├── qr.html             Old QR page. Forwards to /handover
 │   ├── brand/              Insight logo and leaf mark
-│   └── qr/                 Ready to use QR codes: phone card, iPad card, plain SVG
+│   └── qr/                 Ready to use QR codes (built by tools/make_qr.py)
+│       ├── screens/        Full screen cards: iPhone, Android, older phone, iPad, iPad Pro
+│       ├── plain/          QR on its own: SVG with and without logo, PNG 512 / 1024 / 2048
+│       ├── print/          A4 and A5 PDFs
+│       └── insight-qr-all.zip  Everything above in one file
 │
 ├── tools/
 │   ├── make_qr.py          Rebuilds the QR codes in public/qr for your address
@@ -174,7 +197,7 @@ pip install -r tools/requirements.txt
 python3 tools/make_qr.py https://your-address
 ```
 
-It writes `insight-qr-phone.png`, `insight-qr-ipad.png` and `insight-qr.svg` into `public/qr`. On a Mac it finds Chrome on its own. Anywhere else, set `CHROME` to the Chrome program first. Then redeploy so the handover page offers the new codes.
+It rebuilds all of `public/qr`: the five device cards, the plain QR files, the A4 and A5 PDFs and the zip. On a Mac it finds Chrome on its own. Anywhere else, set `CHROME` to the Chrome program first. Then redeploy so the handover page offers the new codes.
 
 ## Connect Insight Tracker
 

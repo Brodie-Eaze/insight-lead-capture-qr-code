@@ -34,6 +34,16 @@ p{color:var(--ink2)}
 .btn:active{transform:translateY(1px);box-shadow:0 2px 6px rgba(0,119,78,.3)}
 .btn.ghost{background:#fff;color:var(--deep);box-shadow:inset 0 0 0 1.5px var(--line),0 2px 6px rgba(11,21,38,.04)}
 .btn.wide{grid-column:1/-1}
+.grp{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.dls{display:grid;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.dl{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;padding:10px 16px;text-decoration:none;color:var(--ink);-webkit-tap-highlight-color:transparent}
+.dl+.dl{border-top:1px solid var(--line)}
+.dl:active{background:var(--paper)}
+.dl span{display:grid;min-width:0}
+.dl b{font-size:16px;font-weight:700}
+.dl small{font-size:13px;color:var(--mute)}
+.dl svg{flex:none;color:var(--green)}
+
 .qr{display:grid;place-items:center;background:var(--paper);border-radius:18px;padding:18px}
 .qr img{width:min(240px,70vw);height:auto;background:#fff;border-radius:16px;padding:12px;box-shadow:0 8px 24px rgba(11,77,53,.12)}
 .steps{list-style:none;display:grid;gap:12px;counter-reset:s}
@@ -72,11 +82,28 @@ p code,li code{background:var(--mint);color:var(--deep);padding:1px 6px;border-r
 
   <section class="card">
     <div class="num"><b>2</b><h2>QR code</h2></div>
-    <div class="qr"><img src="/qr/insight-qr.svg" alt="QR code that opens the Insight call back page"></div>
-    <div class="btns">
-      <a class="btn" href="/qr/insight-qr-phone.png" download>Phone card</a>
-      <a class="btn" href="/qr/insight-qr-ipad.png" download>iPad card</a>
-      <a class="btn ghost wide" href="/qr/insight-qr.svg" download>QR only (SVG, for the app or print)</a>
+    <div class="qr"><img src="/qr/plain/insight-qr.svg" alt="QR code that opens the Insight call back page"></div>
+    <a class="btn wide" href="/qr/insight-qr-all.zip" download><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>Download every size (zip)</a>
+    <h3 class="grp">Show on a device</h3>
+    <div class="dls">
+      <a class="dl" href="/qr/screens/insight-qr-iphone.png" download><span><b>iPhone</b><small>1179 x 2556, full screen</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/qr/screens/insight-qr-android.png" download><span><b>Android phone</b><small>1080 x 2400, full screen</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/qr/screens/insight-qr-phone-short.png" download><span><b>Older or smaller phone</b><small>1080 x 1440</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/qr/screens/insight-qr-ipad.png" download><span><b>iPad and iPad Air</b><small>1640 x 2360, full screen</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/qr/screens/insight-qr-ipad-pro.png" download><span><b>iPad Pro</b><small>2048 x 2732, full screen</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+    </div>
+    <h3 class="grp">QR only, for the app</h3>
+    <div class="dls">
+      <a class="dl" href="/qr/plain/insight-qr.svg" download><span><b>SVG with logo</b><small>Sharp at any size. Best for the app</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/qr/plain/insight-qr-no-logo.svg" download><span><b>SVG without logo</b><small>For places a logo will not fit</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/qr/plain/insight-qr-512.png" download><span><b>PNG small</b><small>512 x 512</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/qr/plain/insight-qr-1024.png" download><span><b>PNG medium</b><small>1024 x 1024</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/qr/plain/insight-qr-2048.png" download><span><b>PNG large</b><small>2048 x 2048</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+    </div>
+    <h3 class="grp">Print</h3>
+    <div class="dls">
+      <a class="dl" href="/qr/print/insight-qr-a4.pdf" download><span><b>A4 poster</b><small>PDF, ready to print</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/qr/print/insight-qr-a5.pdf" download><span><b>A5 flyer</b><small>PDF, ready to print</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
     </div>
   </section>
 

@@ -7,7 +7,7 @@ import { join, extname, normalize } from 'node:path';
 const root = join(import.meta.dirname, 'public');
 const dataDir = process.env.DATA_DIR || join(import.meta.dirname, 'data');
 const leadsFile = join(dataDir, 'leads.jsonl');
-const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.png': 'image/png', '.json': 'application/json', '.webp': 'image/webp' };
+const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.png': 'image/png', '.json': 'application/json', '.webp': 'image/webp', '.pdf': 'application/pdf', '.zip': 'application/zip' };
 
 export function resolvePath(url) {
   let p; try { p = decodeURIComponent(new URL(url, 'http://x').pathname); } catch { return null; } // bad % escapes would crash the process
