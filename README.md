@@ -16,7 +16,7 @@ All screenshots are taken on a phone sized screen with made up details.
 
 | 1. Form | 2. Filled in | 3. Sent |
 |---|---|---|
-| <img src="docs/screenshots/1-form.png" width="240" alt="The empty call back form"> | <img src="docs/screenshots/2-form-filled.png" width="240" alt="The form filled in with pests ticked"> | <img src="docs/screenshots/3-thank-you.png" width="240" alt="The thank you screen with the Insight logo"> |
+| <img src="docs/screenshots/1-form.png" width="240" alt="The empty call back form"> | <img src="docs/screenshots/2-form-filled.png" width="240" alt="The form filled in with the pest dropdown open"> | <img src="docs/screenshots/3-thank-you.png" width="240" alt="The thank you screen with the Insight logo"> |
 
 | 4. Team handover page | 5. Leads list (password protected) |
 |---|---|
@@ -51,7 +51,7 @@ Rep's app shows QR  →  customer scans  →  form (/)  →  POST /api/lead
 ├── public/                 Everything the browser loads
 │   ├── index.html          The call back form (what the QR opens)
 │   ├── form.css            Styles for the form
-│   ├── form.js             Sends the form, shows the thank you, offline queue
+│   ├── form.js             Pest dropdown label, sends the form, thank you screen, offline queue
 │   ├── handover.html       Team handover page: link, QR downloads, door steps, rep links, tech spec
 │   ├── leads.css           Styles for the password protected leads list
 │   ├── qr.html             Old QR page. Forwards to /handover

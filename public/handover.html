@@ -37,8 +37,8 @@ p{color:var(--ink2)}
 .qr{display:grid;place-items:center;background:var(--paper);border-radius:18px;padding:18px}
 .qr img{width:min(240px,70vw);height:auto;background:#fff;border-radius:16px;padding:12px;box-shadow:0 8px 24px rgba(11,77,53,.12)}
 .steps{list-style:none;display:grid;gap:12px;counter-reset:s}
-.steps li{display:grid;grid-template-columns:28px 1fr;gap:12px;color:var(--ink2);counter-increment:s}
-.steps li::before{content:counter(s);width:28px;height:28px;border-radius:50%;background:var(--mint);color:var(--deep);display:grid;place-items:center;font-weight:800;font-size:14px}
+.steps li{position:relative;padding-left:40px;min-height:28px;color:var(--ink2);counter-increment:s} /* block, not grid: inline <code> must stay in the text */
+.steps li::before{content:counter(s);position:absolute;left:0;top:-1px;width:28px;height:28px;border-radius:50%;background:var(--mint);color:var(--deep);display:grid;place-items:center;font-weight:800;font-size:14px}
 label{font-size:14px;font-weight:700;color:var(--ink2)}
 input{font:inherit;font-size:17px;width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:14px;outline:none;text-transform:uppercase}
 input:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(0,119,78,.14)}

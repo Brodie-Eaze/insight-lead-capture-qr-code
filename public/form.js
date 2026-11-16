@@ -13,6 +13,16 @@
   const flush = async () => { const p = get(); if (!p) return; try { await send(p); set(null); done(); } catch (e) { if (e.user) set(null); } };
   addEventListener('online', flush); flush();
 
+  // Pest dropdown: show what's picked in the closed field.
+  const pick = document.getElementById('pick'), pickLabel = document.getElementById('pickLabel');
+  const showPicked = () => {
+    const names = [...f.querySelectorAll('input[name="pests"]:checked')].map((c) => c.nextElementSibling.textContent);
+    pickLabel.textContent = names.length ? names.join(', ') : 'Choose any that apply';
+    pickLabel.classList.toggle('ph', !names.length);
+  };
+  f.addEventListener('change', (ev) => { if (ev.target.name === 'pests') showPicked(); });
+  document.getElementById('pickDone').addEventListener('click', () => { pick.open = false; pick.querySelector('summary').focus(); });
+
   f.addEventListener('submit', async (ev) => {
     ev.preventDefault();
     const fd = new FormData(f), data = Object.fromEntries(fd);

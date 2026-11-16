@@ -9,7 +9,7 @@
 <link rel="icon" href="/brand/mark-colour.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/form.css?v=5">
+<link rel="stylesheet" href="/form.css?v=6">
 </head>
 <body>
 
@@ -30,16 +30,20 @@
     </div>
     <div class="field"><label for="e">Email</label><input id="e" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="120"></div>
     <fieldset class="field"><legend>What's bugging you? <span class="opt">(optional)</span></legend>
-      <div class="chips">
-        <label><input type="checkbox" name="pests" value="spiders">Spiders</label>
-        <label><input type="checkbox" name="pests" value="ants">Ants</label>
-        <label><input type="checkbox" name="pests" value="cockroaches">Cockroaches</label>
-        <label><input type="checkbox" name="pests" value="rats-mice">Rats and mice</label>
-        <label><input type="checkbox" name="pests" value="wasps">Wasps</label>
-        <label><input type="checkbox" name="pests" value="termites">Termites</label>
-        <label><input type="checkbox" name="pests" value="silverfish">Silverfish</label>
-        <label><input type="checkbox" name="pests" value="other">Something else</label>
-      </div>
+      <details class="pick" id="pick">
+        <summary><span id="pickLabel" class="ph">Choose any that apply</span><svg class="chev" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <div class="opts">
+          <label><input type="checkbox" name="pests" value="spiders"><span>Spiders</span></label>
+          <label><input type="checkbox" name="pests" value="ants"><span>Ants</span></label>
+          <label><input type="checkbox" name="pests" value="cockroaches"><span>Cockroaches</span></label>
+          <label><input type="checkbox" name="pests" value="rats-mice"><span>Rats and mice</span></label>
+          <label><input type="checkbox" name="pests" value="wasps"><span>Wasps</span></label>
+          <label><input type="checkbox" name="pests" value="termites"><span>Termites</span></label>
+          <label><input type="checkbox" name="pests" value="silverfish"><span>Silverfish</span></label>
+          <label><input type="checkbox" name="pests" value="other"><span>Something else</span></label>
+          <button type="button" class="done-pick" id="pickDone">Done</button>
+        </div>
+      </details>
     </fieldset>
     <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
     <p class="consent">By sending this you agree to Insight Pest Solutions contacting you about your enquiry. See our <a href="https://insightpestsolutions.au/privacy-policy/" target="_blank" rel="noopener">privacy policy</a>.</p>
@@ -56,6 +60,6 @@
   <p class="foot"><a href="https://insightpestsolutions.au" target="_blank" rel="noopener">insightpestsolutions.au</a></p>
 </main>
 
-<script src="/form.js?v=5"></script>
+<script src="/form.js?v=6"></script>
 </body>
 </html>
