@@ -3,3 +3,6 @@ node_modules
 .qr
 docs
 tools
+Dockerfile
+.dockerignore
+.env
