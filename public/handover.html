@@ -63,9 +63,9 @@ p code,li code{background:var(--mint);color:var(--deep);padding:1px 6px;border-r
   <section class="card">
     <div class="num"><b>1</b><h2>Lead capture link</h2></div>
     <p>This is where the QR code sends people. They fill in their details and the lead is saved.</p>
-    <span class="link" id="url">https://insight-quote-production.up.railway.app</span>
+    <span class="link" id="url"></span>
     <div class="btns">
-      <button class="btn" data-copy="https://insight-quote-production.up.railway.app">Copy link</button>
+      <button class="btn" id="urlCopy">Copy link</button>
       <a class="btn ghost" href="/" target="_blank" rel="noopener">Open page</a>
     </div>
   </section>
@@ -97,7 +97,7 @@ p code,li code{background:var(--mint);color:var(--deep);padding:1px 6px;border-r
     <p>Add a rep code to the link and every lead from that QR shows who it came from.</p>
     <label for="rep">Rep code</label>
     <input id="rep" placeholder="e.g. JSMITH" maxlength="30" autocomplete="off" autocapitalize="characters" spellcheck="false">
-    <span class="link" id="repUrl">https://insight-quote-production.up.railway.app/?rep=CODE</span>
+    <span class="link" id="repUrl"></span>
     <div class="btns"><button class="btn wide" id="repCopy">Copy rep link</button></div>
   </section>
 
@@ -110,8 +110,7 @@ p code,li code{background:var(--mint);color:var(--deep);padding:1px 6px;border-r
     <div class="num"><b>6</b><h2>For the tech team: Insight Tracker</h2></div>
     <ol class="steps">
       <li>Make an endpoint in Insight Tracker that accepts a JSON POST and creates a SALES LEAD task.</li>
-      <li>Send Brodie the URL and, if you want one, a shared secret.</li>
-      <li>We set them as <code>TRACKER_WEBHOOK_URL</code> and <code>TRACKER_WEBHOOK_SECRET</code>. The secret arrives in the <code>X-Insight-Secret</code> header.</li>
+      <li>Set its address as <code>TRACKER_WEBHOOK_URL</code> on the server, plus <code>TRACKER_WEBHOOK_SECRET</code> if you want one. The secret arrives in the <code>X-Insight-Secret</code> header.</li>
       <li>Return any 2xx to accept the lead. We wait up to 8 seconds.</li>
     </ol>
     <p>One POST per lead:</p>
@@ -141,16 +140,18 @@ p code,li code{background:var(--mint);color:var(--deep);padding:1px 6px;border-r
 
 <script>
 (() => {
-  const BASE = 'https://insight-quote-production.up.railway.app';
+  const BASE = location.origin; // whatever address this copy is hosted on
   const toast = document.getElementById('toast');
   const copy = async (text) => {
     try { await navigator.clipboard.writeText(text); }
     catch { const t = document.createElement('textarea'); t.value = text; document.body.append(t); t.select(); document.execCommand('copy'); t.remove(); }
     toast.classList.add('on'); clearTimeout(copy.t); copy.t = setTimeout(() => toast.classList.remove('on'), 1400);
   };
-  document.querySelectorAll('[data-copy]').forEach((b) => b.addEventListener('click', () => copy(b.dataset.copy)));
+  document.getElementById('url').textContent = BASE;
+  document.getElementById('urlCopy').addEventListener('click', () => copy(BASE));
   const rep = document.getElementById('rep'), out = document.getElementById('repUrl');
   const repLink = () => BASE + '/?rep=' + encodeURIComponent((rep.value.trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '')) || 'CODE');
+  out.textContent = repLink();
   rep.addEventListener('input', () => { out.textContent = repLink(); });
   document.getElementById('repCopy').addEventListener('click', () => copy(repLink()));
 })();

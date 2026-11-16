@@ -17,7 +17,8 @@
   const pick = document.getElementById('pick'), pickLabel = document.getElementById('pickLabel');
   const showPicked = () => {
     const names = [...f.querySelectorAll('input[name="pests"]:checked')].map((c) => c.nextElementSibling.textContent);
-    pickLabel.textContent = names.length ? names.join(', ') : 'Choose any that apply';
+    // Two names fit on a phone; past that, show a count so the field never overflows.
+    pickLabel.textContent = !names.length ? 'Choose any that apply' : names.length <= 2 ? names.join(', ') : `${names[0]} and ${names.length - 1} more`;
     pickLabel.classList.toggle('ph', !names.length);
   };
   f.addEventListener('change', (ev) => { if (ev.target.name === 'pests') showPicked(); });

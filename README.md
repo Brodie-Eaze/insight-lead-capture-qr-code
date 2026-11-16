@@ -6,9 +6,12 @@ At the door, a customer who only wants a call back scans a QR code shown in the 
 
 | | |
 |---|---|
-| Live form (the QR target) | https://insight-quote-production.up.railway.app |
-| Team handover page | https://insight-quote-production.up.railway.app/handover |
+| Preview form | https://insight-quote-production.up.railway.app |
+| Preview handover page | https://insight-quote-production.up.railway.app/handover |
+| Host it yourself | [Deploy on your own system](#deploy-on-your-own-system) |
 | Tech spec for Insight Tracker | [docs/TECH-HANDOVER.md](docs/TECH-HANDOVER.md) |
+
+The Railway links are a **preview** so you can see it working. Insight hosts the real one on its own system using the steps below.
 
 ## Screenshots
 
@@ -46,7 +49,9 @@ Rep's app shows QR  →  customer scans  →  form (/)  →  POST /api/lead
 ├── server.mjs              The whole server: serves the pages, takes leads, sends them to Insight Tracker, leads list
 ├── test.mjs                Checks the lead validation rules (npm test)
 ├── package.json            No dependencies. Node 20 or newer
-├── railway.json            Railway build and health check settings
+├── Dockerfile              Container image for hosting it yourself
+├── .env.example            Every setting, copy to .env and fill in
+├── railway.json            Settings for our Railway preview only
 │
 ├── public/                 Everything the browser loads
 │   ├── index.html          The call back form (what the QR opens)
@@ -59,7 +64,8 @@ Rep's app shows QR  →  customer scans  →  form (/)  →  POST /api/lead
 │   └── qr/                 Ready to use QR codes: phone card, iPad card, plain SVG
 │
 ├── tools/
-│   └── make_qr.py          Rebuilds the QR codes in public/qr
+│   ├── make_qr.py          Rebuilds the QR codes in public/qr for your address
+│   └── requirements.txt    Python package the QR tool needs
 │
 └── docs/
     ├── TECH-HANDOVER.md    How Insight Tracker receives leads (fields, headers, retries)
@@ -76,19 +82,27 @@ Rep's app shows QR  →  customer scans  →  form (/)  →  POST /api/lead
 | `/leads` | Leads list | Insight team, password needed |
 | `/leads.csv` | All leads as a spreadsheet | Insight team, password needed |
 | `/qr/...` | QR code images | App team, print |
-| `/health` | Returns `ok` | Railway health check |
+| `/health` | Returns `ok` | Health checks and uptime monitors |
 
 ## Run it on your computer
+
+You need Node 20.6 or newer. There is nothing to install.
 
 ```bash
 npm test
 ```
 
 ```bash
-LEADS_PASSWORD=pick-one node server.mjs
+cp .env.example .env
 ```
 
-Then open http://localhost:8093. Leads are saved to `data/leads.jsonl`, which git ignores.
+Put a password in `LEADS_PASSWORD` in `.env`, then start it:
+
+```bash
+node --env-file=.env server.mjs
+```
+
+Open http://localhost:8093. Leads are saved to `data/leads.jsonl`, which git ignores.
 
 ## Settings
 
@@ -97,30 +111,70 @@ Set these as environment variables. None are stored in the code.
 | Variable | Needed | What it does |
 |---|---|---|
 | `LEADS_PASSWORD` | Yes | Password for `/leads` and `/leads.csv` |
-| `DATA_DIR` | On Railway | Folder for `leads.jsonl`. On Railway this is the `/data` volume so leads survive deploys |
+| `DATA_DIR` | Yes, in production | Folder for `leads.jsonl`. Must be storage that survives restarts and redeploys. Defaults to `data/` in the repo |
 | `TRACKER_WEBHOOK_URL` | To connect Insight Tracker | Where each lead is posted |
 | `TRACKER_WEBHOOK_SECRET` | Optional | Sent in the `X-Insight-Secret` header so Insight Tracker can check the post is from us |
-| `PORT` | Set by Railway | Defaults to 8093 |
+| `PORT` | Optional | Defaults to 8093. Most hosts set it for you |
 
-## Deploy
+## Deploy on your own system
 
-The live site runs on Railway as the `insight-quote` service. From the repo root:
+It is one Node file with no dependencies, so it runs anywhere Node 20 or Docker runs.
+
+**What you need**
+- A server or container host that runs Node 20+ or Docker
+- A web address with HTTPS, for example `callback.insightpestsolutions.au`. HTTPS is required because the leads login cookie only works over HTTPS
+- Storage that survives restarts, for `leads.jsonl`
+
+**Option A: Docker**
 
 ```bash
-railway up --service insight-quote
+docker build -t insight-lead-capture .
 ```
+
+```bash
+docker run -d --name insight-lead-capture -p 8093:8093 -v insight-leads:/data -e LEADS_PASSWORD=change-me insight-lead-capture
+```
+
+Add `-e TRACKER_WEBHOOK_URL=...` and `-e TRACKER_WEBHOOK_SECRET=...` once Insight Tracker is ready. The image saves leads in `/data`, so keep that volume.
+
+**Option B: Node**
+
+```bash
+cp .env.example .env
+```
+
+Fill in `.env`, with `DATA_DIR` pointing at storage that survives restarts. Then run it under your process manager (systemd, pm2 or similar):
+
+```bash
+node --env-file=.env server.mjs
+```
+
+**Then, for either option**
+
+1. Put it behind your HTTPS proxy or load balancer, pointing at port 8093. Use one proxy hop: the rate limit reads the last address in `X-Forwarded-For`.
+2. Open `https://your-address/health`. It should say `ok`.
+3. Rebuild the QR codes for your address (next section). The ones in `public/qr` point at our preview.
+4. Submit a test lead, then check it at `https://your-address/leads`.
+5. Point the QR in the rep app at your address, with `?rep=CODE` if you track reps.
+6. Share `https://your-address/handover` with the team. Its links follow whatever address it is hosted on.
 
 When you change `form.css` or `form.js`, bump the `?v=` number on them in `public/index.html` so phones don't keep the old copy.
 
+Our preview runs on Railway (`railway.json`). You don't need Railway to host it.
+
 ## Rebuild the QR codes
 
-Only needed if the form address changes. You need a Mac with Google Chrome in Applications, and Python with `segno` (`pip install segno`).
+Do this once with your own address, and again if it changes. You need Python 3 and Google Chrome.
 
 ```bash
-python3 tools/make_qr.py
+pip install -r tools/requirements.txt
 ```
 
-It writes `insight-qr-phone.png`, `insight-qr-ipad.png` and `insight-qr.svg` into `public/qr`.
+```bash
+python3 tools/make_qr.py https://your-address
+```
+
+It writes `insight-qr-phone.png`, `insight-qr-ipad.png` and `insight-qr.svg` into `public/qr`. On a Mac it finds Chrome on its own. Anywhere else, set `CHROME` to the Chrome program first. Then redeploy so the handover page offers the new codes.
 
 ## Connect Insight Tracker
 
@@ -131,7 +185,7 @@ Read [docs/TECH-HANDOVER.md](docs/TECH-HANDOVER.md). In short: build an endpoint
 - Leads are personal information. They live only in `leads.jsonl` on the server and in Insight Tracker. Neither is in this repo.
 - The leads password and webhook secret are environment variables only.
 - The server checks every field, limits how many leads one network can send, ignores bots that fill a hidden field, and blocks spreadsheet formula tricks in the CSV.
-- Railway has no Sydney region, so the server sits offshore. Once Insight Tracker is receiving leads, the local copy can be cleared on a schedule.
+- Our Railway preview sits offshore because Railway has no Sydney region. Hosting it yourself lets you keep leads in Australia. Once Insight Tracker is receiving leads, the local copy can be cleared on a schedule.
 
 ## Brand
 

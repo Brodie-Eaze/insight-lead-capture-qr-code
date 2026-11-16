@@ -1,12 +1,12 @@
 # Call back QR: connecting it to Insight Tracker
 
-The QR codes open a call back request form at https://insight-quote-production.up.railway.app. Each lead is saved on that service first. It is then sent to Insight Tracker once you give us a webhook address.
+The QR codes open a call back request form. Our preview runs at https://insight-quote-production.up.railway.app, and you can host your own copy (see the README). Each lead is saved on the server first. It is then sent to Insight Tracker once the webhook address is set.
 
 ## What you need to do
 
 1. Make an endpoint in Insight Tracker that accepts a JSON POST and creates a SALES LEAD task, the same as the web contact form leads.
-2. Send us the URL and, if you want one, a shared secret.
-3. We set two variables on the service:
+2. Pick a shared secret if you want one.
+3. Set two variables on the server (on our preview, send them to Brodie and we set them):
    - `TRACKER_WEBHOOK_URL` is your endpoint.
    - `TRACKER_WEBHOOK_SECRET` is optional. It arrives in the `X-Insight-Secret` header, so check it on your side.
 4. Return any 2xx status to accept the lead. We wait up to 8 seconds.

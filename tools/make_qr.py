@@ -1,10 +1,11 @@
 """Branded QR cards for the Insight call back page.
-Run from the repo root: <venv with segno>/bin/python tools/make_qr.py  ->  public/qr/insight-qr-phone.png, insight-qr-ipad.png, insight-qr.svg
+Run from the repo root:  python3 tools/make_qr.py https://your-address
+Needs: pip install -r tools/requirements.txt, and Google Chrome (set CHROME if it is not in the Mac default spot).  ->  public/qr/insight-qr-phone.png, insight-qr-ipad.png, insight-qr.svg
 """
-import base64, pathlib, subprocess, segno
+import base64, os, pathlib, subprocess, sys, segno
 
-URL = "https://insight-quote-production.up.railway.app"
-CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+URL = sys.argv[1] if len(sys.argv) > 1 else "https://insight-quote-production.up.railway.app"  # our preview
+CHROME = os.environ.get("CHROME", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 HERE = pathlib.Path(__file__).resolve().parent.parent  # repo root
 OUT = HERE / "public" / "qr"; OUT.mkdir(parents=True, exist_ok=True)
 GREEN, DEEP = "#00774e", "#0b4d35"

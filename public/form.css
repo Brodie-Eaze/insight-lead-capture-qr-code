@@ -11,7 +11,7 @@ body{font-family:Manrope,system-ui,-apple-system,sans-serif;background:var(--pap
 .band p{font-size:17px;color:rgba(255,255,255,.86)}
 
 main{max-width:560px;margin:-56px auto 0;padding:0 16px calc(32px + env(safe-area-inset-bottom));position:relative;display:grid;gap:22px}
-.fcard{background:#fff;border-radius:24px;padding:22px;display:grid;gap:16px;box-shadow:0 24px 60px rgba(11,77,53,.16),0 2px 6px rgba(11,21,38,.05)}
+.fcard{background:#fff;border-radius:24px;padding:22px;display:grid;grid-template-columns:minmax(0,1fr);gap:16px;box-shadow:0 24px 60px rgba(11,77,53,.16),0 2px 6px rgba(11,21,38,.05)}
 @media(min-width:600px){.fcard{padding:32px}}
 .field{display:grid;gap:7px;border:0;min-width:0}
 label,legend{font-size:14px;font-weight:700;color:var(--ink2)}
@@ -22,25 +22,25 @@ input:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(0,119,78,.14)}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:480px){.row{grid-template-columns:1fr}}
 /* Pest dropdown: native <details>, styled like the other fields */
-.pick{border:1.5px solid var(--line);border-radius:14px;background:#fff;transition:border-color .15s,box-shadow .15s}
-.pick[open]{border-color:var(--green);box-shadow:0 0 0 4px rgba(0,119,78,.14)}
+.pick{min-width:0;border:1.5px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;transition:border-color .15s,box-shadow .15s}
+.pick[open]{border-color:var(--green)}
 .pick summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:13px 16px;font-size:17px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .pick summary::-webkit-details-marker{display:none}
 .pick summary:focus-visible{outline:none}
 .pick:has(summary:focus-visible){border-color:var(--green);box-shadow:0 0 0 4px rgba(0,119,78,.14)}
-#pickLabel{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+#pickLabel{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 .ph{color:#9aa3ad}
 .chev{flex:none;color:var(--mute);transition:transform .2s}
 .pick[open] .chev{transform:rotate(180deg)}
-.opts{border-top:1px solid var(--line);padding:6px}
-.opts label{position:relative;display:flex;align-items:center;justify-content:space-between;min-height:50px;padding:0 12px;border-radius:10px;font-size:16px;font-weight:600;color:var(--ink);cursor:pointer;-webkit-tap-highlight-color:transparent}
-.opts label:active{background:var(--paper)}
+.opts{border-top:1px solid var(--line);padding:0 16px}
+.opts label{position:relative;display:flex;align-items:center;justify-content:space-between;min-height:52px;font-size:16px;font-weight:500;color:var(--ink2);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.opts label+label{border-top:1px solid #eef1ef}
 .opts input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
 .opts label::after{content:"";flex:none;width:24px;height:24px;border-radius:7px;border:1.5px solid var(--line);background:#fff center/14px no-repeat;transition:background-color .15s,border-color .15s}
-.opts label:has(input:checked){background:var(--mint)}
+.opts label:has(input:checked){color:var(--ink);font-weight:700}
 .opts label:has(input:checked)::after{background-color:var(--green);border-color:var(--green);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E")}
-.opts label:has(input:focus-visible){box-shadow:inset 0 0 0 2px var(--green)}
-.done-pick{display:block;width:calc(100% - 12px);margin:6px;min-height:46px;border:0;border-radius:999px;background:var(--mint);color:var(--deep);font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.opts label:has(input:focus-visible)::after{box-shadow:0 0 0 3px rgba(0,119,78,.25)}
+.done-pick{display:block;width:100%;margin:4px 0 14px;min-height:46px;border:0;border-radius:999px;background:var(--mint);color:var(--deep);font:inherit;font-weight:700;font-size:15px;cursor:pointer}
 .consent{font-size:13px;color:var(--mute)}
 .consent a{color:var(--ink2)}
 .btn{display:flex;align-items:center;justify-content:center;width:100%;font:inherit;font-weight:700;font-size:17px;padding:18px 24px;border-radius:999px;border:0;cursor:pointer;background:var(--green);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 8px 20px rgba(0,119,78,.3);transition:transform .15s,box-shadow .15s}
