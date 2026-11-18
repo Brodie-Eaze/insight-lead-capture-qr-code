@@ -79,6 +79,8 @@ Rep's app shows QR  →  customer scans  →  form (/)  →  POST /api/lead
 │   ├── handover.html       Team handover page: link, QR downloads, door steps, rep links, tech spec
 │   ├── leads.css           Styles for the password protected leads list
 │   ├── qr.html             Old QR page. Forwards to /handover
+│   ├── logos.html          Logo pack download page: name badge PDFs, 300 dpi logos, SVG, PNG
+│   ├── logos/              The logo files that page links to, plus one zip
 │   ├── brand/              Insight logo and leaf mark
 │   └── qr/                 Ready to use QR codes (built by tools/make_qr.py)
 │       ├── screens/        Full screen cards: iPhone, Android, older phone, iPad, iPad Pro
@@ -101,6 +103,7 @@ Rep's app shows QR  →  customer scans  →  form (/)  →  POST /api/lead
 |---|---|---|
 | `/` | Call back form | Customers, from the QR |
 | `/handover` | Team handover page | Reps, app team, tech team |
+| `/logos` | Logo pack and name badge files | Anyone printing Insight branding |
 | `POST /api/lead` | Takes one lead as JSON | The form |
 | `/leads` | Leads list | Insight team, password needed |
 | `/leads.csv` | All leads as a spreadsheet | Insight team, password needed |

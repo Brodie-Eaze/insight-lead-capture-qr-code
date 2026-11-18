@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b4d35">
+<title>Insight logo pack</title>
+<link rel="icon" href="/brand/mark-colour.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#00774e;--deep:#0b4d35;--mint:#e8f5ee;--paper:#fcf9f8;--ink:#0b1526;--ink2:#3a4556;--mute:#6b7685;--line:#dfe5e2}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:Manrope,system-ui,-apple-system,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.55;text-wrap:pretty}
+.band{background:var(--deep);color:#fff;padding:calc(24px + env(safe-area-inset-top)) 16px 72px;position:relative;overflow:hidden}
+.band::before{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(0,119,78,.6),rgba(11,77,53,0) 60%)}
+.band .in{position:relative;max-width:640px;margin:0 auto}
+.band img{height:30px;width:auto;margin-bottom:22px}
+.band h1{font-size:clamp(28px,7.6vw,40px);line-height:1.08;font-weight:800;letter-spacing:-.02em}
+.band p{margin-top:10px;color:rgba(255,255,255,.86);font-size:16px}
+main{max-width:640px;margin:-48px auto 0;padding:0 16px calc(40px + env(safe-area-inset-bottom));position:relative;display:grid;gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;display:grid;gap:14px;box-shadow:0 10px 30px rgba(11,77,53,.07)}
+@media(min-width:600px){.card{padding:26px}}
+.num{display:flex;align-items:center;gap:12px}
+.num b{flex:none;width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:14px;font-weight:800}
+h2{font-size:20px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+p{color:var(--ink2)}
+.small{font-size:14px;color:var(--mute)}
+.link{display:block;background:var(--mint);border-radius:14px;padding:14px 16px;font-weight:700;font-size:15px;color:var(--deep);word-break:break-all}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:12px 16px;border-radius:999px;border:0;font:inherit;font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;background:var(--green);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 6px 16px rgba(0,119,78,.25);transition:transform .15s,box-shadow .15s;-webkit-tap-highlight-color:transparent}
+.btn:active{transform:translateY(1px);box-shadow:0 2px 6px rgba(0,119,78,.3)}
+.btn.ghost{background:#fff;color:var(--deep);box-shadow:inset 0 0 0 1.5px var(--line),0 2px 6px rgba(11,21,38,.04)}
+.btn.wide{grid-column:1/-1}
+.grp{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.dls{display:grid;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.dl{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;padding:10px 16px;text-decoration:none;color:var(--ink);-webkit-tap-highlight-color:transparent}
+.dl+.dl{border-top:1px solid var(--line)}
+.dl:active{background:var(--paper)}
+.dl span{display:grid;min-width:0}
+.dl b{font-size:16px;font-weight:700}
+.dl small{font-size:13px;color:var(--mute)}
+.dl svg{flex:none;color:var(--green)}
+
+.qr{display:grid;place-items:center;background:var(--paper);border-radius:18px;padding:18px}
+.qr img{width:min(240px,70vw);height:auto;background:#fff;border-radius:16px;padding:12px;box-shadow:0 8px 24px rgba(11,77,53,.12)}
+.steps{list-style:none;display:grid;gap:12px;counter-reset:s}
+.steps li{position:relative;padding-left:40px;min-height:28px;color:var(--ink2);counter-increment:s} /* block, not grid: inline <code> must stay in the text */
+.steps li::before{content:counter(s);position:absolute;left:0;top:-1px;width:28px;height:28px;border-radius:50%;background:var(--mint);color:var(--deep);display:grid;place-items:center;font-weight:800;font-size:14px}
+label{font-size:14px;font-weight:700;color:var(--ink2)}
+input{font:inherit;font-size:17px;width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:14px;outline:none;text-transform:uppercase}
+input:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(0,119,78,.14)}
+pre{background:#0f1a17;color:#d7efe3;border-radius:14px;padding:14px;font-size:13px;line-height:1.5;overflow-x:auto;-webkit-overflow-scrolling:touch}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em}
+p code,li code{background:var(--mint);color:var(--deep);padding:1px 6px;border-radius:6px;word-break:break-all}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-weight:700;font-size:14px;padding:12px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.sw{flex:none;width:26px;height:26px;border-radius:8px;border:1px solid var(--line);margin-right:2px}
+.dl{justify-content:flex-start}.dl span{flex:1}
+.dl b{font-size:15px;white-space:nowrap}
+@media(max-width:359px){.dl b{white-space:normal}}  /* tiny phones: wrap rather than cut words off */
+.hero-logos{display:grid;gap:10px}
+.hero-logos div{border-radius:18px;padding:22px;display:grid;place-items:center}
+.hero-logos img{width:min(260px,70%);height:auto}
+</style>
+</head>
+<body>
+<header class="band">
+  <div class="in">
+    <img src="/brand/logo-white.png" alt="Insight Pest Solutions">
+    <h1>Insight logo pack</h1>
+    <p>Name badge files and the logo in every size. Tap a file to download it.</p>
+  </div>
+</header>
+<main>
+  <section class="card">
+    <div class="hero-logos">
+      <div style="background:#fff;border:1px solid var(--line)"><img src="/logos/SVG-vector/Insight-logo-green.svg" alt="Insight logo in green"></div>
+      <div style="background:#00774E"><img src="/logos/SVG-vector/Insight-logo-white.svg" alt="Insight logo in white"></div>
+    </div>
+    <a class="btn wide" href="/logos/Insight-Logo-Pack.zip" download><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>Download everything (zip)</a>
+    <p class="small">3.2 MB. Every colour and size, plus a read me. Insight green is #00774E.</p>
+  </section>
+  <section class="card">
+    <div class="num"><b>1</b><h2>Name badges</h2></div>
+    <p class="small">Ready to print. Send the bleed version if the printer asks for bleed.</p>
+    <div class="dls">
+      <a class="dl" href="/logos/Name-badge/Insight-badge-76x38mm-pin-badge-white-badge-green-logo.pdf" download><i class="sw" style="background:#ffffff"></i><span><b>76 x 38 mm, white badge</b><small>Pin or magnetic badge, PDF · 32 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/Name-badge/Insight-badge-76x38mm-pin-badge-green-badge-white-logo.pdf" download><i class="sw" style="background:#00774E"></i><span><b>76 x 38 mm, green badge</b><small>Pin or magnetic badge, PDF · 32 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/Name-badge/Insight-badge-76x38mm-pin-badge-green-badge-white-logo-3mm-bleed.pdf" download><i class="sw" style="background:#00774E"></i><span><b>76 x 38 mm, green + bleed</b><small>3 mm bleed for printers that ask, PDF · 32 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/Name-badge/Insight-badge-86x54mm-card-badge-white-badge-green-logo.pdf" download><i class="sw" style="background:#ffffff"></i><span><b>86 x 54 mm, white badge</b><small>Card or lanyard badge, PDF · 32 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/Name-badge/Insight-badge-86x54mm-card-badge-green-badge-white-logo.pdf" download><i class="sw" style="background:#00774E"></i><span><b>86 x 54 mm, green badge</b><small>Card or lanyard badge, PDF · 32 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/Name-badge/Insight-badge-86x54mm-card-badge-green-badge-white-logo-3mm-bleed.pdf" download><i class="sw" style="background:#00774E"></i><span><b>86 x 54 mm, green + bleed</b><small>3 mm bleed for printers that ask, PDF · 32 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+    </div>
+  </section>
+  <section class="card">
+    <div class="num"><b>2</b><h2>Logo for a badge template</h2></div>
+    <p class="small">300 dpi PNG on a transparent background. 50 mm suits most badges.</p>
+    <div class="dls">
+      <a class="dl" href="/logos/Name-badge/Logo-300dpi/Insight-logo-green-50mm-wide-300dpi.png" download><i class="sw" style="background:#00774E"></i><span><b>Green, 50 mm wide</b><small>PNG, 300 dpi · 13 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/Name-badge/Logo-300dpi/Insight-logo-white-50mm-wide-300dpi.png" download><i class="sw" style="background:#ffffff"></i><span><b>White, 50 mm wide</b><small>PNG, 300 dpi, for green badges · 11 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/Name-badge/Logo-300dpi/Insight-logo-black-50mm-wide-300dpi.png" download><i class="sw" style="background:#000000"></i><span><b>Black, 50 mm wide</b><small>PNG, 300 dpi, one colour or engraving · 9 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/Name-badge/Logo-300dpi/Insight-logo-green-30mm-wide-300dpi.png" download><i class="sw" style="background:#00774E"></i><span><b>Green, 30 mm wide</b><small>PNG, 300 dpi · 8 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/Name-badge/Logo-300dpi/Insight-logo-green-40mm-wide-300dpi.png" download><i class="sw" style="background:#00774E"></i><span><b>Green, 40 mm wide</b><small>PNG, 300 dpi · 10 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/Name-badge/Logo-300dpi/Insight-logo-green-60mm-wide-300dpi.png" download><i class="sw" style="background:#00774E"></i><span><b>Green, 60 mm wide</b><small>PNG, 300 dpi · 16 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+    </div>
+  </section>
+  <section class="card">
+    <div class="num"><b>3</b><h2>Vector, for printers and designers</h2></div>
+    <p class="small">Sharp at any size.</p>
+    <div class="dls">
+      <a class="dl" href="/logos/SVG-vector/Insight-logo-green.svg" download><i class="sw" style="background:#00774E"></i><span><b>Logo, green</b><small>SVG · 87 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/SVG-vector/Insight-logo-white.svg" download><i class="sw" style="background:#ffffff"></i><span><b>Logo, white</b><small>SVG · 87 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/SVG-vector/Insight-logo-black.svg" download><i class="sw" style="background:#000000"></i><span><b>Logo, black</b><small>SVG · 87 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/PDF-print/Insight-logo-green.pdf" download><i class="sw" style="background:#00774E"></i><span><b>Logo, green</b><small>PDF · 32 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/SVG-vector/Insight-leaf-green.svg" download><i class="sw" style="background:#00774E"></i><span><b>Leaf only, green</b><small>SVG · 24 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+    </div>
+  </section>
+  <section class="card">
+    <div class="num"><b>4</b><h2>Large images</h2></div>
+    <p class="small">PNG, 2400 px wide.</p>
+    <div class="dls">
+      <a class="dl" href="/logos/PNG/2400px/Insight-logo-green-2400px.png" download><i class="sw" style="background:#00774E"></i><span><b>Logo, green</b><small>Transparent background · 62 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/PNG/2400px/Insight-logo-white-2400px.png" download><i class="sw" style="background:#ffffff"></i><span><b>Logo, white</b><small>Transparent background · 52 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/PNG/2400px/Insight-logo-green-on-white-2400px.png" download><i class="sw" style="background:#ffffff"></i><span><b>Logo, green on white</b><small>Solid background · 66 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/PNG/2400px/Insight-logo-white-on-green-2400px.png" download><i class="sw" style="background:#00774E"></i><span><b>Logo, white on green</b><small>Solid background · 66 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="dl" href="/logos/PNG/2400px/Insight-leaf-green-2400px.png" download><i class="sw" style="background:#00774E"></i><span><b>Leaf only, green</b><small>Transparent background · 92 KB</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+    </div>
+  </section>
+</main>
+</body>
+</html>

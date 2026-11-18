@@ -1,0 +1,29 @@
+INSIGHT LOGO PACK
+
+For name badges (folder: Name-badge)
+  Ready to print badge layouts, PDF:
+    76 x 38 mm  pin or magnetic badge
+    86 x 54 mm  card or lanyard badge
+  Each size comes as a white badge with a green logo and a green badge with a white logo.
+  The green badges also come with 3 mm bleed. Send the bleed version if the printer asks for bleed.
+
+  Logo only at exact print widths, 300 dpi PNG (folder: Name-badge/Logo-300dpi):
+    30, 40, 50 and 60 mm wide, in green, white and black, on a transparent background.
+    Pick the width that fits your badge. 50 mm suits most badges.
+
+Everything else
+  SVG-vector   Sharpest for any printer or designer. Scales to any size.
+  PDF-print    Each logo on its own page, vector.
+  PNG          600, 1200, 2400 and 4800 px wide.
+
+  Insight-logo   the full logo with the word Insight
+  Insight-leaf   the leaf mark on its own
+
+  Colours:
+    green            Insight green, transparent background
+    white            for dark or green badges, transparent background
+    black            for one colour printing or engraving
+    green-on-white   solid white background
+    white-on-green   solid green background
+
+Insight green is #00774E.
